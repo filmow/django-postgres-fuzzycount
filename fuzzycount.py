@@ -17,7 +17,7 @@ DJANGO_VERSION_GTE_19 = LooseVersion(django.get_version()) \
                         >= LooseVersion('1.9')
 
 FUZZY_CACHE_ENABLED = getattr(settings, "FUZZY_CACHE_ENABLED", False)
-FUZZY_CACHE_TIME = getattr(settings, "FUZZYCOUNT_CACHE_TIME", 120)
+FUZZY_CACHE_TIME = getattr(settings, "FUZZY_CACHE_TIME", 120)
 
 
 class FuzzyCountQuerySet(QuerySet):
@@ -39,7 +39,8 @@ class FuzzyCountQuerySet(QuerySet):
             # Get the count or execute count() and save in cache
             if FUZZY_CACHE_ENABLED and not nocache:
                 query_str = self.query.__str__()
-                qs_key = hashlib.md5(query_str).hexdigest()
+                qs_key = "FUZZY_{}".format(
+                    hashlib.md5(query_str).hexdigest())
                 count_cache = cache.get(qs_key)
 
                 if not count_cache:
