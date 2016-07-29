@@ -59,6 +59,15 @@ being used, and only applies the approximate count query when using
 PostgreSQL, so other database backends can be used and will behave as
 usual (for varying definitions of `usual`, depending on the database :-).
 
+Using cache for count() queries
+===============================
+
+To enable cached count() queries, first configure `Django Cache Framework`_ and also configure in project settings::
+
+    FUZZY_CACHE_ENABLED = True
+    FUZZY_CACHE_TIME = 60  # (Time in seconds. Optional, default=120 seconds)
+
+    
 Inspiration
 ===========
 
@@ -71,3 +80,4 @@ Inspiration
 .. _`pip`: http://www.pip-installer.org/
 .. _`postgres_loose_table_counts`: https://github.com/goodfilms/postgres_loose_table_counts
 .. _`Django snippet`: http://djangosnippets.org/snippets/2855/
+.. _`Django Cache Framework`: https://docs.djangoproject.com/en/1.9/topics/cache/
